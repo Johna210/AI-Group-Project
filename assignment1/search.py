@@ -1,6 +1,7 @@
 from romania import graph
 from collections import deque
 import heapq
+from math import sqrt
 
 # Depth first search
 def dfs(source, destination,graph):
@@ -123,14 +124,14 @@ def heurisitc(source,destination):
     s_coordinate = graph.nodes[source]
     d_coordinate = graph.nodes[destination]
 
-    return (float(s_coordinate[0]) - float(d_coordinate[0]) + float(s_coordinate[1]) - float(d_coordinate[1]))
+    return sqrt((float(s_coordinate[0]) - float(d_coordinate[0]))**2 + abs(float(s_coordinate[1]) - float(d_coordinate[1]))**2)
 
 
 # greedy search
 def greedy_search(source,destination,graph):
     fringe = []
     visited = set([])
-    heapq.heappush(fringe, (-1 *heurisitc(source,destination),source))
+    heapq.heappush(fringe, (heurisitc(source,destination),source))
     path = {source: None}
 
     while fringe:
@@ -144,7 +145,7 @@ def greedy_search(source,destination,graph):
             city, weight = neighbor
             if city not in visited:
                 # because we want to get the minimum value, we need to multiply the heuristic value by -1
-                heapq.heappush(fringe,(-1 * heurisitc(city,destination),city))
+                heapq.heappush(fringe,(heurisitc(city,destination),city))
                 path[city] = (current[1],weight)
 
     if current[1] != destination:
@@ -161,13 +162,7 @@ def greedy_search(source,destination,graph):
                 break
             current,length = path[current][0] , path[current][1]
             total_length += length
-
         return path_list[::-1],len(visited),total_length
-
-
-
-
-
 
 # Depth limited search helper function for the iterative deepening search
 def depth_limited_search(source,destination,graph,limit):
@@ -237,7 +232,6 @@ def bidirectional_search(source,destination,graph):
     intersection = None
 
     while source_fringe and destination_fringe:
-
         # Forward search
         current = source_fringe.popleft()
         visited.add((current[0],0))
@@ -262,22 +256,21 @@ def bidirectional_search(source,destination,graph):
         if (current[0],0) in visited:
             intersection = current[0]
             break
-
+        
         neighbors = graph.get_neighbours(current[0])
+
         for neighbor in neighbors:
             city, weight = neighbor
             if (city,1) not in visited:
                 destination_fringe.append((city,1))
                 destination_path[city] = (current[0],weight)
 
-    print(f"Intersection: {intersection}")
-    print(f"source_path: {source_path}")
-    print(f"destination_path: {destination_path}")
-    
+    # Return path,total_length and nodes visited if the intersection is found
     if intersection:
         path_list = []
         current = intersection
         total_length = 0
+        # From the intersection to the source
         while current:
             path_list.append(current)
             if current == None:
@@ -289,6 +282,7 @@ def bidirectional_search(source,destination,graph):
 
         path_list = path_list[::-1]
         current = intersection
+        # From the intersection to the destination
         while current:
             if destination_path[current] == None:
                 break
@@ -299,27 +293,48 @@ def bidirectional_search(source,destination,graph):
         return path_list,len(visited),total_length  
 
 # A* search
-def astar():
-    pass
+def astar(source,destination,graph):
+    fringe = []
+    visited = set([])
+    # Push the heuristic function + cost, current cost, source and current path
+    heapq.heappush(fringe,(heurisitc(source,destination),0,source, [source]))
 
+    while fringe:
+        current = heapq.heappop(fringe)
+        visited.add(current[2])
+
+        if current[2] == destination:
+            return current[3],len(visited),current[1]
+        
+        neighbors = graph.get_neighbours(current[2])
+        for neighbor in neighbors:
+            city, weight = neighbor
+            if city not in visited:
+                g = current[1] + weight
+                h = heurisitc(city,destination)
+                path = current[3] + [city]
+                heapq.heappush(fringe,((g + h),g,city,path))
 
 print("From Arad to Bucharest")
-print(f"With dfs {dfs("Arad","Bucharest",graph)}")
+# print(f"With dfs {dfs("Arad","Bucharest",graph)}")
 print(f"With bfs {bfs("Arad","Bucharest",graph)}")
 print(f"With ufs {ucs("Arad","Bucharest",graph)}")
 print(f"With greedy_search {greedy_search("Arad","Bucharest",graph)}")
-print(f"With ids {ids("Arad","Bucharest",graph)}")
-print(f"With biderectional search {bidirectional_search("Arad","Bucharest",graph)}")
+# print(f"With ids {ids("Arad","Bucharest",graph)}")
+# print(f"With biderectional search {bidirectional_search("Arad","Bucharest",graph)}")
+print(f"With A* {astar("Arad","Bucharest",graph)}")
 
 print()
 
 print("From Arad to Oradea")
-print(f"With dfs {dfs("Arad","Fagaras",graph)}")
-print(f"With bfs {bfs("Arad","Fagaras",graph)}")
-print(f"With ucs {ucs("Arad","Fagaras",graph)}")
-print(f"With greedy_search {greedy_search("Arad","Fagaras",graph)}")
-print(f"With ids {ids("Arad","Fagaras",graph)}")
-print(f"With biderectional search {bidirectional_search("Arad","Fagaras",graph)}")
+# print(f"With dfs {dfs("Arad","Oradea",graph)}")
+print(f"With bfs {bfs("Arad","Oradea",graph)}")
+print(f"With ucs {ucs("Arad","Oradea",graph)}")
+print(f"With greedy_search {greedy_search("Arad","Oradea",graph)}")
+# print(f"With ids {ids("Arad","Oradea",graph)}")
+# print(f"With biderectional search {bidirectional_search("Arad","Oradea",graph)}")
+print(f"With A* {astar("Arad","Oradea",graph)}")
+
 
    
 

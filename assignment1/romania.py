@@ -43,6 +43,3 @@ graph.add_edge("Urziceni", "Vaslui", 142)
 graph.add_edge("Hirsova", "Eforie", 86)
 graph.add_edge("Iasi", "Neamt", 87)
 graph.add_edge("Iasi", "Vaslui", 92)
-
-def give_graph():
-    return graph
