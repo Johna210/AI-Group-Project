@@ -2,6 +2,7 @@ from romania import graph
 from collections import deque
 import heapq
 
+# Depth first search
 def dfs(source, destination,graph):
     stack = []
     visited = set([])
@@ -40,7 +41,7 @@ def dfs(source, destination,graph):
         # return the path, the number of nodes visited and the total length
         return path_list[::-1],len(visited),total_length
 
-
+# Breadth first search
 def bfs(source,destination,graph):
     fringe = deque()
     visited = set([])
@@ -75,7 +76,7 @@ def bfs(source,destination,graph):
         return path_list[::-1],len(visited),total_length
 
 
-
+# Uniform cost search
 def ucs(source,destination,graph):
     # use priority queue data structure to implement ucs by using heapq module
     fringe = []
@@ -113,6 +114,8 @@ def ucs(source,destination,graph):
 
         return path_list[::-1],len(visited),total_length
 
+
+# Heuristic function(manhattan distance) for the greedy search and astar search
 def heurisitc(source,destination):
     # A Simple heuristic function that calculates the manhattan distance between two cities
     # By using their latitude and longitude
@@ -123,6 +126,7 @@ def heurisitc(source,destination):
     return (float(s_coordinate[0]) - float(d_coordinate[0]) + float(s_coordinate[1]) - float(d_coordinate[1]))
 
 
+# greedy search
 def greedy_search(source,destination,graph):
     fringe = []
     visited = set([])
@@ -162,10 +166,10 @@ def greedy_search(source,destination,graph):
 
 
 
-def astar():
-    pass
 
 
+
+# Depth limited search helper function for the iterative deepening search
 def depth_limited_search(source,destination,graph,limit):
     stack = []
     visited = set([])
@@ -203,6 +207,7 @@ def depth_limited_search(source,destination,graph,limit):
 
         return path_list[::-1],len(visited),total_length
 
+# Iterative deepening search
 def ids(source,destination,graph):
     limit = 0
     while True:
@@ -213,6 +218,90 @@ def ids(source,destination,graph):
         limit += 1
 
 
+# Biderectional search
+def bidirectional_search(source,destination,graph):
+
+    # Instantiate two fringes for the source and destination
+    source_fringe = deque()
+    destination_fringe = deque()
+
+    # The visited set will have both sides of the search but the forward search will have 0 and backward search will have1
+    visited = set([])
+    source_fringe.append((source,0))
+    destination_fringe.append((destination,1))
+
+    # path for both the forward and backward search
+    source_path = {source: None}
+    destination_path = {destination: None}
+
+    intersection = None
+
+    while source_fringe and destination_fringe:
+
+        # Forward search
+        current = source_fringe.popleft()
+        visited.add((current[0],0))
+
+        # If the two searches are intersected, break the loop
+        if (current[0],1) in visited:
+            intersection = current[0]
+            break
+
+        neighbors = graph.get_neighbours(current[0])
+        for neighbor in neighbors:
+            city, weight = neighbor
+            if (city,0) not in visited:
+                source_fringe.append((city,0))
+                source_path[city] = (current[0],weight)
+
+        # Backward search
+        current = destination_fringe.popleft()
+        visited.add((current[0],1))
+
+        # If the two searches are intersected, break the loop
+        if (current[0],0) in visited:
+            intersection = current[0]
+            break
+
+        neighbors = graph.get_neighbours(current[0])
+        for neighbor in neighbors:
+            city, weight = neighbor
+            if (city,1) not in visited:
+                destination_fringe.append((city,1))
+                destination_path[city] = (current[0],weight)
+
+    print(f"Intersection: {intersection}")
+    print(f"source_path: {source_path}")
+    print(f"destination_path: {destination_path}")
+    
+    if intersection:
+        path_list = []
+        current = intersection
+        total_length = 0
+        while current:
+            path_list.append(current)
+            if current == None:
+                break
+            if source_path[current] == None:
+                break
+            current,length = source_path[current][0] , source_path[current][1]
+            total_length += length
+
+        path_list = path_list[::-1]
+        current = intersection
+        while current:
+            if destination_path[current] == None:
+                break
+            current,length = destination_path[current][0] , destination_path[current][1]
+            path_list.append(current)
+            total_length += length
+
+        return path_list,len(visited),total_length  
+
+# A* search
+def astar():
+    pass
+
 
 print("From Arad to Bucharest")
 print(f"With dfs {dfs("Arad","Bucharest",graph)}")
@@ -220,7 +309,7 @@ print(f"With bfs {bfs("Arad","Bucharest",graph)}")
 print(f"With ufs {ucs("Arad","Bucharest",graph)}")
 print(f"With greedy_search {greedy_search("Arad","Bucharest",graph)}")
 print(f"With ids {ids("Arad","Bucharest",graph)}")
-
+print(f"With biderectional search {bidirectional_search("Arad","Bucharest",graph)}")
 
 print()
 
@@ -230,7 +319,8 @@ print(f"With bfs {bfs("Arad","Fagaras",graph)}")
 print(f"With ucs {ucs("Arad","Fagaras",graph)}")
 print(f"With greedy_search {greedy_search("Arad","Fagaras",graph)}")
 print(f"With ids {ids("Arad","Fagaras",graph)}")
+print(f"With biderectional search {bidirectional_search("Arad","Fagaras",graph)}")
+
    
-def bs():
-    pass
+
 
