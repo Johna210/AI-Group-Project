@@ -114,10 +114,13 @@ def ucs(source,destination,graph):
         return path_list[::-1],len(visited),total_length
 
 def heurisitc(source,destination):
-    s = graph.nodes[source]
-    d = graph.nodes[destination]
+    # A Simple heuristic function that calculates the manhattan distance between two cities
+    # By using their latitude and longitude
 
-    return (float(s[0]) - float(d[0]) + float(s[1]) - float(d[1]))
+    s_coordinate = graph.nodes[source]
+    d_coordinate = graph.nodes[destination]
+
+    return (float(s_coordinate[0]) - float(d_coordinate[0]) + float(s_coordinate[1]) - float(d_coordinate[1]))
 
 
 def greedy_search(source,destination,graph):
@@ -157,11 +160,67 @@ def greedy_search(source,destination,graph):
 
         return path_list[::-1],len(visited),total_length
 
+
+
+def astar():
+    pass
+
+
+def depth_limited_search(source,destination,graph,limit):
+    stack = []
+    visited = set([])
+    stack.append((source,0))
+    path = {source: None}
+
+    while stack:
+        current = stack.pop()
+        visited.add(current[0])
+
+        if current[0] == destination:
+            break
+        if current[1] < limit:
+            neighbors = graph.get_neighbours(current[0])
+            for neighbor in neighbors:
+                city, weight = neighbor
+                if city not in visited:
+                    stack.append((city,current[1] + 1))
+                    path[city] = (current[0],weight)
+
+    if current[0] != destination:
+        return None
+    else:
+        path_list = []
+        total_length = 0
+        current = current[0]
+        while current:
+            path_list.append(current)
+            if current == None:
+                break
+            if path[current] == None:
+                break
+            current,length = path[current][0] , path[current][1]
+            total_length += length
+
+        return path_list[::-1],len(visited),total_length
+
+def ids(source,destination,graph):
+    limit = 0
+    while True:
+        result = depth_limited_search(source,destination,graph,limit)
+        if result:
+            print(f"Limit: {limit}")
+            return result
+        limit += 1
+
+
+
 print("From Arad to Bucharest")
 print(f"With dfs {dfs("Arad","Bucharest",graph)}")
 print(f"With bfs {bfs("Arad","Bucharest",graph)}")
 print(f"With ufs {ucs("Arad","Bucharest",graph)}")
 print(f"With greedy_search {greedy_search("Arad","Bucharest",graph)}")
+print(f"With ids {ids("Arad","Bucharest",graph)}")
+
 
 print()
 
@@ -170,13 +229,8 @@ print(f"With dfs {dfs("Arad","Fagaras",graph)}")
 print(f"With bfs {bfs("Arad","Fagaras",graph)}")
 print(f"With ucs {ucs("Arad","Fagaras",graph)}")
 print(f"With greedy_search {greedy_search("Arad","Fagaras",graph)}")
-
-def astar():
-    pass
-
-def ids():
-    pass
-
+print(f"With ids {ids("Arad","Fagaras",graph)}")
+   
 def bs():
     pass
 
