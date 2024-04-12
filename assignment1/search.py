@@ -1,3 +1,4 @@
+import time
 from romania import graph
 from collections import deque
 import heapq
@@ -130,7 +131,7 @@ def heurisitc(source,destination,graph):
 def coordinate_heuristic(source,destination,g):
     x1,y1 = g.nodes[source]
     x2,y2 = g.nodes[destination]
-    return abs(x1-x2) + abs(y1-y2)
+    return sqrt((x1-x2)**2) + ((y1-y2)**2)
 
 
 
@@ -334,13 +335,20 @@ def astar(source,destination,graph,heurisitc=heurisitc):
 
 
 # print("From Arad to Bucharest")
-# # print(f"With dfs {dfs("Arad","Bucharest",graph)}")
-# print(f"With bfs {bfs("Arad","Bucharest",graph)}")
-# print(f"With ufs {ucs("Arad","Bucharest",graph)}")
-# print(f"With greedy_search {greedy_search("Arad","Bucharest",graph)}")
-# # print(f"With ids {ids("Arad","Bucharest",graph)}")
-# # print(f"With biderectional search {bidirectional_search("Arad","Bucharest",graph)}")
-# print(f"With A* {astar("Arad","Bucharest",graph)}")
+# start = time.perf_counter()
+# print(f"With dfs {dfs("Arad","Bucharest",graph)} time taken = {(time.perf_counter() -start) * 10 ** 6}")
+# start = time.perf_counter()
+# print(f"With bfs {bfs("Arad","Bucharest",graph)} time taken = {(time.perf_counter() -start) * 10 ** 6}")
+# start = time.perf_counter()
+# print(f"With ufs {ucs("Arad","Bucharest",graph)} time taken = {(time.perf_counter() -start) * 10 ** 6}")
+# start = time.perf_counter()
+# print(f"With greedy_search {greedy_search("Arad","Bucharest",graph)} time taken = {(time.perf_counter() -start) * 10 ** 6}")
+# start = time.perf_counter()
+# print(f"With ids {ids("Arad","Bucharest",graph)} time taken = {(time.perf_counter() -start) * 10 ** 6}")
+# start = time.perf_counter()
+# print(f"With biderectional search {bidirectional_search("Arad","Bucharest",graph)} time taken = {(time.perf_counter() -start) * 10 ** 6}")
+# start = time.perf_counter()
+# print(f"With A* {astar("Arad","Bucharest",graph)} time taken = {(time.perf_counter() -start) * 10 ** 6}")
 
 # print()
 
@@ -352,8 +360,3 @@ def astar(source,destination,graph,heurisitc=heurisitc):
 # # print(f"With ids {ids("Arad","Oradea",graph)}")
 # # print(f"With biderectional search {bidirectional_search("Arad","Oradea",graph)}")
 # print(f"With A* {astar("Arad","Oradea",graph)}")
-
-
-   
-
-
