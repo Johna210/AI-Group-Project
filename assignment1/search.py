@@ -117,7 +117,7 @@ def ucs(source,destination,graph):
 
 
 # Heuristic function(manhattan distance) for the greedy search and astar search
-def heurisitc(source,destination):
+def heurisitc(source,destination,graph):
     # A Simple heuristic function that calculates the manhattan distance between two cities
     # By using their latitude and longitude
 
@@ -127,11 +127,25 @@ def heurisitc(source,destination):
     return sqrt((float(s_coordinate[0]) - float(d_coordinate[0]))**2 + abs(float(s_coordinate[1]) - float(d_coordinate[1]))**2)
 
 
+def coordinate_heuristic(source,destination,g):
+    x1,y1 = g.nodes[source]
+    x2,y2 = g.nodes[destination]
+    return abs(x1-x2) + abs(y1-y2)
+
+
+
 # greedy search
 def greedy_search(source,destination,graph):
     fringe = []
     visited = set([])
-    heapq.heappush(fringe, (heurisitc(source,destination),source))
+    try:
+        heurisitc_function = heurisitc
+        h = heurisitc_function(source,destination,graph)
+    except:
+        heurisitc_function = coordinate_heuristic
+        h = coordinate_heuristic(source,destination,graph)
+
+    heapq.heappush(fringe, (h,source))
     path = {source: None}
 
     while fringe:
@@ -144,8 +158,7 @@ def greedy_search(source,destination,graph):
         for neighbor in neighbors:
             city, weight = neighbor
             if city not in visited:
-                # because we want to get the minimum value, we need to multiply the heuristic value by -1
-                heapq.heappush(fringe,(heurisitc(city,destination),city))
+                heapq.heappush(fringe,(heurisitc_function(city,destination,graph),city))
                 path[city] = (current[1],weight)
 
     if current[1] != destination:
@@ -208,7 +221,6 @@ def ids(source,destination,graph):
     while True:
         result = depth_limited_search(source,destination,graph,limit)
         if result:
-            print(f"Limit: {limit}")
             return result
         limit += 1
 
@@ -293,11 +305,15 @@ def bidirectional_search(source,destination,graph):
         return path_list,len(visited),total_length  
 
 # A* search
-def astar(source,destination,graph):
+def astar(source,destination,graph,heurisitc=heurisitc):
     fringe = []
     visited = set([])
     # Push the heuristic function + cost, current cost, source and current path
-    heapq.heappush(fringe,(heurisitc(source,destination),0,source, [source]))
+    try:
+        h = heurisitc(source,destination,graph)
+    except:
+        h = coordinate_heuristic(source,destination,graph)
+    heapq.heappush(fringe,(h,0,source, [source]))
 
     while fringe:
         current = heapq.heappop(fringe)
@@ -311,29 +327,31 @@ def astar(source,destination,graph):
             city, weight = neighbor
             if city not in visited:
                 g = current[1] + weight
-                h = heurisitc(city,destination)
+                h = heurisitc(city,destination,graph)
                 path = current[3] + [city]
                 heapq.heappush(fringe,((g + h),g,city,path))
 
-print("From Arad to Bucharest")
-# print(f"With dfs {dfs("Arad","Bucharest",graph)}")
-print(f"With bfs {bfs("Arad","Bucharest",graph)}")
-print(f"With ufs {ucs("Arad","Bucharest",graph)}")
-print(f"With greedy_search {greedy_search("Arad","Bucharest",graph)}")
-# print(f"With ids {ids("Arad","Bucharest",graph)}")
-# print(f"With biderectional search {bidirectional_search("Arad","Bucharest",graph)}")
-print(f"With A* {astar("Arad","Bucharest",graph)}")
 
-print()
 
-print("From Arad to Oradea")
-# print(f"With dfs {dfs("Arad","Oradea",graph)}")
-print(f"With bfs {bfs("Arad","Oradea",graph)}")
-print(f"With ucs {ucs("Arad","Oradea",graph)}")
-print(f"With greedy_search {greedy_search("Arad","Oradea",graph)}")
-# print(f"With ids {ids("Arad","Oradea",graph)}")
-# print(f"With biderectional search {bidirectional_search("Arad","Oradea",graph)}")
-print(f"With A* {astar("Arad","Oradea",graph)}")
+# print("From Arad to Bucharest")
+# # print(f"With dfs {dfs("Arad","Bucharest",graph)}")
+# print(f"With bfs {bfs("Arad","Bucharest",graph)}")
+# print(f"With ufs {ucs("Arad","Bucharest",graph)}")
+# print(f"With greedy_search {greedy_search("Arad","Bucharest",graph)}")
+# # print(f"With ids {ids("Arad","Bucharest",graph)}")
+# # print(f"With biderectional search {bidirectional_search("Arad","Bucharest",graph)}")
+# print(f"With A* {astar("Arad","Bucharest",graph)}")
+
+# print()
+
+# print("From Arad to Oradea")
+# # print(f"With dfs {dfs("Arad","Oradea",graph)}")
+# print(f"With bfs {bfs("Arad","Oradea",graph)}")
+# print(f"With ucs {ucs("Arad","Oradea",graph)}")
+# print(f"With greedy_search {greedy_search("Arad","Oradea",graph)}")
+# # print(f"With ids {ids("Arad","Oradea",graph)}")
+# # print(f"With biderectional search {bidirectional_search("Arad","Oradea",graph)}")
+# print(f"With A* {astar("Arad","Oradea",graph)}")
 
 
    

@@ -32,6 +32,34 @@ class Graph:
     def __str__(self) -> str:
         return str(self.neighbours)
     
+class RandomGraph():
+    def __init__(self):
+        self.nodes = {}
+        self.neighbours = defaultdict(list)
 
+    def add_node(self,node,coor):
+        self.nodes[node] = coor
+
+    def remove_node(self,node):
+        if node in self.nodes:
+            del self.nodes[node]
+        if node in self.neighbours:
+            del self.neighbours[node]
+        
+    def add_edge(self,source,destination,wieght):
+        self.neighbours[source].append((destination,wieght))
+        self.neighbours[destination].append((source,wieght))
+
+    def remove_edge(self,source,destination):
+        if source in self.neighbours and destination in self.neighbours[source]:
+            del self.neighbours[source][destination]
+        if destination in  self.neighbours and source in self.neighbours[destination]:
+            del self.neighbours[destination][source]
+    
+    def get_neighbours(self,node):
+        return self.neighbours[node]
+    
+    def __str__(self) -> str:
+        return str(self.neighbours)
 
     
