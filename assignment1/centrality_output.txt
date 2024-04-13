@@ -1,0 +1,160 @@
+City: Oradea
+Degree Centrality: 0.10526315789473684
+Closeness Centrality: 0.25837320574162675
+Eigenvector Centrality: 0.21491710981048923
+Katz Centrality: 0.22007507684467761
+PageRank Centrality: 0.04364123252136111
+Betweenness Centrality: 0.037037037037037035
+==============================
+City: Zerind
+Degree Centrality: 0.10526315789473684
+Closeness Centrality: 0.22736842105263155
+Eigenvector Centrality: 0.17239796849049693
+Katz Centrality: 0.21797419251362193
+PageRank Centrality: 0.03203332380552714
+Betweenness Centrality: 0.010721247563352826
+==============================
+City: Arad
+Degree Centrality: 0.15789473684210525
+Closeness Centrality: 0.28421052631578947
+Eigenvector Centrality: 0.2591150448452513
+Katz Centrality: 0.24182210032579457
+PageRank Centrality: 0.06444325958679958
+Betweenness Centrality: 0.1793372319688109
+==============================
+City: Timisoara
+Degree Centrality: 0.10526315789473684
+Closeness Centrality: 0.24017790956263899
+Eigenvector Centrality: 0.12152884075313586
+Katz Centrality: 0.21747028633792903
+PageRank Centrality: 0.04954383868062498
+Betweenness Centrality: 0.07797270955165692
+==============================
+City: Lugoj
+Degree Centrality: 0.10526315789473684
+Closeness Centrality: 0.21052631578947367
+Eigenvector Centrality: 0.0750459807544947
+Katz Centrality: 0.21503595843837617
+PageRank Centrality: 0.042782683266110184
+Betweenness Centrality: 0.03996101364522417
+==============================
+City: Mehadia
+Degree Centrality: 0.10526315789473684
+Closeness Centrality: 0.22437673130193903
+Eigenvector Centrality: 0.08482116381686129
+Katz Centrality: 0.21504444466453077
+PageRank Centrality: 0.03542625221494759
+Betweenness Centrality: 0.054580896686159834
+==============================
+City: Drobeta
+Degree Centrality: 0.10526315789473684
+Closeness Centrality: 0.2545168892380204
+Eigenvector Centrality: 0.15818154416959132
+Katz Centrality: 0.2175636429132437
+PageRank Centrality: 0.04138546946567563
+Betweenness Centrality: 0.10526315789473684
+==============================
+City: Craiova
+Degree Centrality: 0.15789473684210525
+Closeness Centrality: 0.30451127819548873
+Eigenvector Centrality: 0.35011910767733806
+Katz Centrality: 0.24274722430202444
+PageRank Centrality: 0.07120362116904447
+Betweenness Centrality: 0.16764132553606237
+==============================
+City: Sibiu
+Degree Centrality: 0.21052631578947367
+Closeness Centrality: 0.3343653250773994
+Eigenvector Centrality: 0.4185454038790393
+Katz Centrality: 0.26493188407737617
+PageRank Centrality: 0.08263709383603696
+Betweenness Centrality: 0.32456140350877194
+==============================
+City: Rimnicu Vilcea
+Degree Centrality: 0.15789473684210525
+Closeness Centrality: 0.3217477656405163
+Eigenvector Centrality: 0.41955632509851803
+Katz Centrality: 0.24705342037325978
+PageRank Centrality: 0.05589373566420178
+Betweenness Centrality: 0.08674463937621832
+==============================
+City: Fagaras
+Degree Centrality: 0.10526315789473684
+Closeness Centrality: 0.3217477656405163
+Eigenvector Centrality: 0.2572558246430731
+Katz Centrality: 0.22252377222039746
+PageRank Centrality: 0.05443807451461985
+Betweenness Centrality: 0.22514619883040934
+==============================
+City: Pitesti
+Degree Centrality: 0.15789473684210525
+Closeness Centrality: 0.3343653250773994
+Eigenvector Centrality: 0.38495730655037724
+Katz Centrality: 0.24501063421773778
+PageRank Centrality: 0.05800044420556994
+Betweenness Centrality: 0.19200779727095513
+==============================
+City: Giurgiu
+Degree Centrality: 0.0
+Closeness Centrality: 0.0
+Eigenvector Centrality: 1.5659039705566256e-26
+Katz Centrality: 0.17178449403076915
+PageRank Centrality: 0.00783289817232376
+Betweenness Centrality: 0.0
+==============================
+City: Bucharest
+Degree Centrality: 0.15789473684210525
+Closeness Centrality: 0.34801288936627284
+Eigenvector Centrality: 0.28880969084028896
+Katz Centrality: 0.2424611945989523
+PageRank Centrality: 0.07041326304931125
+Betweenness Centrality: 0.43469785575048736
+==============================
+City: Urziceni
+Degree Centrality: 0.15789473684210525
+Closeness Centrality: 0.30451127819548873
+Eigenvector Centrality: 0.15189932663257041
+Katz Centrality: 0.2392329281354171
+PageRank Centrality: 0.07316283631229199
+Betweenness Centrality: 0.4152046783625731
+==============================
+City: Eforie
+Degree Centrality: 0.05263157894736842
+Closeness Centrality: 0.1937799043062201
+Eigenvector Centrality: 0.02315559661520519
+Katz Centrality: 0.19328815068030517
+PageRank Centrality: 0.0277737478252804
+Betweenness Centrality: 0.0
+==============================
+City: Hirsova
+Degree Centrality: 0.10526315789473684
+Closeness Centrality: 0.24017790956263899
+Eigenvector Centrality: 0.06366681035605824
+Katz Centrality: 0.21503659443439058
+PageRank Centrality: 0.05019471582878833
+Betweenness Centrality: 0.09941520467836257
+==============================
+City: Vaslui
+Degree Centrality: 0.10526315789473684
+Closeness Centrality: 0.24713958810068648
+Eigenvector Centrality: 0.06518188311519924
+Katz Centrality: 0.21698672995266904
+PageRank Centrality: 0.05776037734514542
+Betweenness Centrality: 0.1871345029239766
+==============================
+City: Iasi
+Degree Centrality: 0.10526315789473684
+Closeness Centrality: 0.20300751879699247
+Eigenvector Centrality: 0.0273209171774789
+Katz Centrality: 0.21278950803272825
+PageRank Centrality: 0.05208234171402007
+Betweenness Centrality: 0.09941520467836257
+==============================
+City: Neamt
+Degree Centrality: 0.05263157894736842
+Closeness Centrality: 0.16883793642522146
+Eigenvector Centrality: 0.009936863990781976
+Katz Centrality: 0.19306344359238364
+PageRank Centrality: 0.02935079082231974
+Betweenness Centrality: 0.0
+==============================
